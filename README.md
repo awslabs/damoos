@@ -1,19 +1,19 @@
-#DAMOOS (DAMON-based Optimal Operation Schemes)
+# DAMOOS (DAMON-based Optimal Operation Schemes)
 
 [DAMOS](https://damonitor.github.io/doc/html/next/admin-guide/mm/damon/usage.html?highlight=damos#damon-based-operation-schemes) or DAMON-based Operation Scheme allows users to do DAMON based memory-management optimization.
 
 This project aims to automate the process of choosing right schemes
 for a workload-system pair.
 
-##Overview
+## Overview
 
 DAMOOS stands for DAMon-based Optimal Operation Schemes and it is built to help the users to find the best DAMON scheme automatically. As the scheme depends both on the workload and the system characteristics, finding a good scheme manually is difficult. DAMOOS currently supports simple scheme adapter, simple RL Adapter, Polynomial Fit Adapter and Particle Swarm Optimization based adapter and in the future would also support more scheme adapters that the users can try out.
-##Prerequisites
+## Prerequisites
 
 
 To understand DAMOOS and the need for it, having a basic understanding of DAMON and DAMON-based Operation Schemes (DAMOS) is required. Please read the documentation about them here: https://damonitor.github.io/doc/html/next/admin-guide/mm/damon/index.html
 
-##Quick Start:
+## Quick Start:
 
 If you are only a user of DAMOOS, then the interactive damoos.sh script is all that you need to know about. If you are interested in writing your own scheme adapters or tweaking some of the code, please read the details of DAMOOS in the different subdirectories.
 
