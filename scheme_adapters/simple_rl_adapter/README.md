@@ -1,4 +1,4 @@
-#simple_rl_adapter
+# simple_rl_adapter
 
 **simple_rl_adapter** - This adapter uses Tabular Q-learning algorithm to find a best scheme by varying min_age and min_size.
 

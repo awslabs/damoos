@@ -1,4 +1,4 @@
-#simple_adapter
+# simple_adapter
 
 As the name suggests this is a simple adapter that runs the given workload multiple times to find the optimal scheme based on a calculated score.
 

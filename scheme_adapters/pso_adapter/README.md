@@ -1,4 +1,4 @@
-#pso_adapter
+# pso_adapter
 
 **pso_adapter** - Uses particle swarm optimization to find the optimal scheme. This is a generic adapter and can tune from 1-6 parameters in one go.
 

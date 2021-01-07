@@ -1,4 +1,4 @@
-#polyfit_adapter
+# polyfit_adapter
 
 **polyfit_adapter** - This adapter uses polynomial fitting to find the best scheme in a huge and continuous search space. Only supports tuning one parameter at a time.
 
