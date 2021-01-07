@@ -21,7 +21,7 @@ You need a DAMON-enabled kernel to try out DAMOOS. You also need to register you
 
 ShortName@@@NameforPID@@@Command
 
-Here, ShortName is the name of the workload that you can will be using with DAMOOS. NameforPID is the name of the process using which DAMOOS can get the process's PID (Just use the top command to find the name under the command column). Command is used to run the workload, it should ideally use an absolute path and put the process in background so that DAMOOS can apply the different schemes to it.
+Here, ShortName is the name of the workload that you will be using with DAMOOS. NameforPID is the name of the process using which DAMOOS can get the process's PID (Just use the top command to find the name under the command column). Command is used to run the workload, it should ideally use an absolute path and put the process in background so that DAMOOS can apply the different schemes to it.
 
 Though damoos.sh is user-friendly and would ask you for all that you need to answer, below is a small example of using the simple adapter for a parsec3 workload named “dedup”
 
