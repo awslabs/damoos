@@ -1,5 +1,5 @@
 # Make sure the command runs in background and should return immediately after running the workload.
-ShortName-NameforPID-Command
+ShortName@@@NameforPID@@@Command
 
 blackscholes@@@blackscholes@@@bash /home/dev4/parsec3_on_ubuntu/run.sh blackscholes > /dev/null 2>&1 &
 bodytrack@@@bodytrack@@@bash /home/dev4/parsec3_on_ubuntu/run.sh bodytrack > /dev/null 2>&1 &
