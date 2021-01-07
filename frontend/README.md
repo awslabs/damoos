@@ -1,4 +1,4 @@
-#Frontend
+# Frontend
 
 Front-end provides an interface for the scheme adapters to interact with the metric collectors. Since metric collectors may be running on the host or locally, the scheme adapters need not worry about it and front-end would manage this.
 
