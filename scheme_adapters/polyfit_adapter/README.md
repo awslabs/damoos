@@ -67,3 +67,20 @@ The JSON file should be added in the json_files directory.
 10. cache_option: This option allows user to force delete the existing cache and create a new cache file using the "force" option. With the "check" option only if a file with the same name does not exist, a new file will be created otherwise the old file will be updated and read from.
 
 **requirements.txt** - This file stores the inputs required by this scheme. It is used by the main damoos interface to ask the user for inputs.
+
+## Results
+
+**Workloads**: From Parsec3 and Splash2x Benchmark
+
+**Systems used for experiments**: i3.metal, m5d.metal and z1d.metal instances.
+
+![Runtime_Overhead](./graphs/Runtime_Overhead.png)
+
+![RSS_Benefit](./graphs/RSS_Benefit.png)
+
+![Score](./graphs/Score.png)
+
+**Graphs fit using polynomial fit adapter**
+
+![Vips Polyfit Graph](./graphs/vips_polyfit_graph.png) ![Water_nsquared Polyfit Graph](./graphs/water_nsquared_polyfit_graph.png)
+
