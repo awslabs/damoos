@@ -1,0 +1,3 @@
+Workload_Name(E.g:dedup,canneal,etc.)
+Runtime_Importance_Score(E.g:"0.3")
+Lazybox_Path(E.g:"/home/user/lazybox")

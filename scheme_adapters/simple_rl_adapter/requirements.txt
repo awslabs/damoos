@@ -1,0 +1,7 @@
+1.Lazybox_Path(-lb)
+2.DAMOS_Path(-dm)
+2.Workload_Name(E.g:dedup,canneal)(-w)
+3.Number_of_iterations(-n)
+4.Learning_rate(0-1)(-lr)
+5.Epsilon(0-1)(-e)
+6.Discount_Rate(0-1)(-d)

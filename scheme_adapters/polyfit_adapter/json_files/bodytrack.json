@@ -1,0 +1,27 @@
+{
+    "metrics": [
+        "rss;full_avg",
+        "runtime;stat"
+    ],
+    "workload": "bodytrack",
+    "score_function": "sf.sh",
+    "num_dimension": 1,
+    "range": {
+        "min_size": "4K",
+        "max_size": "max",
+        "min_age": [
+            "0s",
+            "60s"
+        ],
+        "max_age": "max",
+        "min_freq": "min",
+        "max_freq": "min",
+        "action": "pageout"
+    },
+    "total_runtime": 10000000000000000,
+    "num_runs": 20,
+    "cache_file": "bodytrack",
+    "read_from_cache": true,
+    "write_to_cache": true,
+    "cache_option": "check"
+}

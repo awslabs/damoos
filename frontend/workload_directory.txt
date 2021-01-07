@@ -1,0 +1,35 @@
+# Make sure the command runs in background and should return immediately after running the workload.
+ShortName-NameforPID-Command
+
+blackscholes@@@blackscholes@@@bash /home/dev4/parsec3_on_ubuntu/run.sh blackscholes > /dev/null 2>&1 &
+bodytrack@@@bodytrack@@@bash /home/dev4/parsec3_on_ubuntu/run.sh bodytrack > /dev/null 2>&1 &
+canneal@@@canneal@@@bash /home/dev4/parsec3_on_ubuntu/run.sh canneal > /dev/null 2>&1 &
+dedup@@@dedup@@@bash /home/dev4/parsec3_on_ubuntu/run.sh dedup > /dev/null 2>&1 &
+facesim@@@facesim@@@bash /home/dev4/parsec3_on_ubuntu/run.sh facesim > /dev/null 2>&1 &
+ferret@@@ferret@@@bash /home/dev4/parsec3_on_ubuntu/run.sh ferret > /dev/null 2>&1 &
+fluidanimate@@@fluidanimate@@@bash /home/dev4/parsec3_on_ubuntu/run.sh fluidanimate > /dev/null 2>&1 &
+freqmine@@@freqmine@@@bash /home/dev4/parsec3_on_ubuntu/run.sh freqmine > /dev/null 2>&1 &
+raytrace@@@rtview@@@bash /home/dev4/parsec3_on_ubuntu/run.sh raytrace > /dev/null 2>&1 &
+streamcluster@@@streamcluster@@@bash /home/dev4/parsec3_on_ubuntu/run.sh streamcluster > /dev/null 2>&1 &
+swaptions@@@swaptions@@@bash /home/dev4/parsec3_on_ubuntu/run.sh swaptions > /dev/null 2>&1 &
+vips@@@vips@@@bash /home/dev4/parsec3_on_ubuntu/run.sh vips > /dev/null 2>&1 &
+x264@@@x264@@@bash /home/dev4/parsec3_on_ubuntu/run.sh x264 > /dev/null 2>&1 &
+
+splash2x.barnes@@@barnes@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.barnes > /dev/null 2>&1 &
+splash2x.fft@@@fft@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.fft > /dev/null 2>&1 &
+splash2x.lu_cb@@@lu_cb@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.lu_cb > /dev/null 2>&1 &
+splash2x.lu_ncb@@@lu_ncb@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.lu_ncb > /dev/null 2>&1 &
+splash2x.ocean_cp@@@ocean_cp@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.ocean_cp > /dev/null 2>&1 &
+splash2x.ocean_ncp@@@ocean_ncp@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.ocean_ncp > /dev/null 2>&1 &
+splash2x.radiosity@@@radiosity@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.radiosity > /dev/null 2>&1 &
+splash2x.radix@@@radix@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.radix > /dev/null 2>&1 &
+splash2x.raytrace@@@raytrace@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.raytrace > /dev/null 2>&1 &
+splash2x.volrend@@@volrend@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.volrend > /dev/null 2>&1 &
+splash2x.water_nsquared@@@water_nsquared@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.water_nsquared > /dev/null 2>&1 &
+splash2x.water_spatial@@@water_spatial@@@bash /home/dev4/parsec3_on_ubuntu/run.sh splash2x.water_spatial > /dev/null 2>&1 &
+
+silo_tpcc@@@dbtest@@@/home/dev4/silo/out-perf.debug.check.masstree/benchmarks/dbtest     --verbose     --bench tpcc     --num-threads 28     --scale-factor 28     --runtime 10 >/dev/null 2>&1 &
+silo_ycsb-1@@@dbtest@@@/home/dev4/silo/out-perf.masstree/benchmarks/dbtest --bench ycsb --verbose --scale-factor 100 --runtime 60 -o "--zipfian-alpha -1.0" > /home/dev4/Damoos-v3/scheme_adapters/deep_rl_adapter/silo_ycsb-1.txt 2>&1 &
+silo_ycsb0.1@@@dbtest@@@/home/dev4/silo/out-perf.masstree/benchmarks/dbtest --bench ycsb --verbose --scale-factor 100 --runtime 60 -o "--zipfian-alpha 0.1" > /home/dev4/Damoos-v3/scheme_adapters/deep_rl_adapter/silo_ycsb0.1.txt 2>&1 &
+silo_ycsb0.9@@@dbtest@@@/home/dev4/silo/out-perf.masstree/benchmarks/dbtest --bench ycsb --verbose --scale-factor 100 --runtime 60 -o "--zipfian-alpha 0.9" > /home/dev4/Damoos-v3/scheme_adapters/deep_rl_adapter/silo_ycsb0.9.txt 2>&1 &
+silo_ycsb1.5@@@dbtest@@@/home/dev4/silo/out-perf.masstree/benchmarks/dbtest --bench ycsb --verbose --scale-factor 100 --runtime 60 -o "--zipfian-alpha 1.5" > /home/dev4/Damoos-v3/scheme_adapters/deep_rl_adapter/silo_ycsb1.5.txt 2>&1 &
