@@ -25,6 +25,7 @@ scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$"
 scheme_dir="$DAMOOS/scheme_adapters/$scheme_name"
 lines=$(cat "$scheme_dir/requirements.txt")
 
+cmd=""
 if [[ "$scheme_name" == "simple_adapter" ]]
 then
 	for line in $lines
@@ -33,13 +34,7 @@ then
 		read -r arg
 		args="${args} $arg"
 	done
-	if script -c "sudo DAMOOS=\"$DAMOOS\" bash \"$scheme_dir/$scheme_name.sh\" $args" -f "$file"
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo DAMOOS=\"$DAMOOS\" bash \"$scheme_dir/$scheme_name.sh\" $args"
 elif [[ "$scheme_name" == "simple_rl_adapter" ]]
 then
 	args="-p ${DAMOOS}"
@@ -74,13 +69,7 @@ then
 			args="${args} -d $arg"
 		fi
 	done
-	if script -c "sudo python3 $scheme_dir/simple_rl_adapter.py $args" -f "$file"
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo python3 $scheme_dir/simple_rl_adapter.py $args"
 
 elif [[ "$scheme_name" == "polyfit_adapter" ]]
 then
@@ -107,13 +96,7 @@ then
 			args="${args} -pfn $arg"
 		fi
 	done
-	if script -c "sudo python3 $scheme_dir/polyfit_adapter.py $args" -f "$file"
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo python3 $scheme_dir/polyfit_adapter.py $args"
 
 elif [[ "$scheme_name" == "pso_adapter" ]]
 then
@@ -137,11 +120,19 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	if script -c "sudo python3 $scheme_dir/pso_adapter.py $args" -f "$file"
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo python3 $scheme_dir/pso_adapter.py $args"
+fi
+
+if [ "$cmd" == "" ]
+then
+	echo "Wrong scheme adapter name ($scheme_name) is given"
+	exit 1
+fi
+
+if script -c "$cmd" -f "$file"
+then
+	echo "Successfull!"
+else
+	echo "Please fix the mentioned error"
+	exit 1
 fi
