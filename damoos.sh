@@ -32,8 +32,7 @@ then
 		read -r arg
 		args="${args} $arg"
 	done
-	script -c "sudo DAMOOS=\"$DAMOOS\" bash \"$DAMOOS/scheme_adapters/$scheme_name/$scheme_name.sh\" $args" -f "$file"
-	if [[ $? -eq 0 ]]
+	if script -c "sudo DAMOOS=\"$DAMOOS\" bash \"$DAMOOS/scheme_adapters/$scheme_name/$scheme_name.sh\" $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
@@ -74,8 +73,7 @@ then
 			args="${args} -d $arg"
 		fi
 	done
-	script -c "sudo python3 $DAMOOS/scheme_adapters/simple_rl_adapter/simple_rl_adapter.py $args" -f $file
-	if [[ $? -eq 0 ]]
+	if script -c "sudo python3 $DAMOOS/scheme_adapters/simple_rl_adapter/simple_rl_adapter.py $args" -f $file
 	then
 		echo "Successfull!"
 	else
@@ -108,8 +106,7 @@ then
 			args="${args} -pfn $arg"
 		fi
 	done
-	script -c "sudo python3 $DAMOOS/scheme_adapters/polyfit_adapter/polyfit_adapter.py $args" -f $file
-	if [[ $? -eq 0 ]]
+	if script -c "sudo python3 $DAMOOS/scheme_adapters/polyfit_adapter/polyfit_adapter.py $args" -f $file
 	then
 		echo "Successfull!"
 	else
@@ -139,8 +136,7 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	script -c "sudo python3 $DAMOOS/scheme_adapters/pso_adapter/pso_adapter.py $args" -f $file
-	if [[ $? -eq 0 ]]
+	if script -c "sudo python3 $DAMOOS/scheme_adapters/pso_adapter/pso_adapter.py $args" -f $file
 	then
 		echo "Successfull!"
 	else
