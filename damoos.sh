@@ -32,7 +32,7 @@ then
 		read -r arg
 		args="${args} $arg"
 	done
-	script -c "sudo DAMOOS="$DAMOOS" bash "$DAMOOS"/scheme_adapters/"$scheme_name"/"$scheme_name".sh $args" -f $file
+	script -c "sudo DAMOOS=\"$DAMOOS\" bash \"$DAMOOS/scheme_adapters/$scheme_name/$scheme_name.sh\" $args" -f "$file"
 	if [[ $? -eq 0 ]]
 	then
 		echo "Successfull!"
