@@ -11,6 +11,13 @@ echo "Choose DAMOOS Scheme Adapter:"
 cat "$DAMOOS"/scheme_adapters.txt
 read -r choice
 
+max_choice=$(wc -l < "scheme_adapters.txt")
+if [ "$choice" -gt "$max_choice" ] || [ "$choice" -lt "1" ]
+then
+	echo "Wrong choice.  It should be a number in [1, $max_choice]"
+	exit 1
+fi
+
 echo "Enter the log file name:"
 read -r file
 
