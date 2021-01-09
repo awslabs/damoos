@@ -22,7 +22,8 @@ echo "Enter the log file name:"
 read -r file
 
 scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
+scheme_dir="$DAMOOS/scheme_adapters/$scheme_name"
+lines=$(cat "$scheme_dir/requirements.txt")
 
 if [[ "$scheme_name" == "simple_adapter" ]]
 then
@@ -32,7 +33,7 @@ then
 		read -r arg
 		args="${args} $arg"
 	done
-	if script -c "sudo DAMOOS=\"$DAMOOS\" bash \"$DAMOOS/scheme_adapters/$scheme_name/$scheme_name.sh\" $args" -f "$file"
+	if script -c "sudo DAMOOS=\"$DAMOOS\" bash \"$scheme_dir/$scheme_name.sh\" $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
@@ -73,7 +74,7 @@ then
 			args="${args} -d $arg"
 		fi
 	done
-	if script -c "sudo python3 $DAMOOS/scheme_adapters/simple_rl_adapter/simple_rl_adapter.py $args" -f "$file"
+	if script -c "sudo python3 $scheme_dir/simple_rl_adapter.py $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
@@ -106,7 +107,7 @@ then
 			args="${args} -pfn $arg"
 		fi
 	done
-	if script -c "sudo python3 $DAMOOS/scheme_adapters/polyfit_adapter/polyfit_adapter.py $args" -f "$file"
+	if script -c "sudo python3 $scheme_dir/polyfit_adapter.py $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
@@ -136,7 +137,7 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	if script -c "sudo python3 $DAMOOS/scheme_adapters/pso_adapter/pso_adapter.py $args" -f "$file"
+	if script -c "sudo python3 $scheme_dir/pso_adapter.py $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
