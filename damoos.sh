@@ -21,10 +21,11 @@ fi
 echo "Enter the log file name:"
 read -r file
 
+scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
+lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
+
 if [[ "$choice" -eq "1" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	for line in $lines
 	do
 		echo "Please enter ${line}"
@@ -41,8 +42,6 @@ then
 	fi
 elif [[ "$choice" -eq "2" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	args="-p ${DAMOOS}"
 	for line in $lines
 	do
@@ -86,8 +85,6 @@ then
 
 elif [[ "$choice" -eq "3" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	args="-dp ${DAMOOS}"
 	for line in $lines
 	do
@@ -122,8 +119,6 @@ then
 
 elif [[ "$choice" -eq "4" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	args="-dp ${DAMOOS}"
 	for line in $lines
 	do
