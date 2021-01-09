@@ -24,7 +24,7 @@ read -r file
 scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
 lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 
-if [[ "$choice" -eq "1" ]]
+if [[ "$scheme_name" == "simple_adapter" ]]
 then
 	for line in $lines
 	do
@@ -40,7 +40,7 @@ then
 		echo "Please fix the mentioned error"
 		exit 1
 	fi
-elif [[ "$choice" -eq "2" ]]
+elif [[ "$scheme_name" == "simple_rl_adapter" ]]
 then
 	args="-p ${DAMOOS}"
 	for line in $lines
@@ -83,7 +83,7 @@ then
 		exit 1
 	fi
 
-elif [[ "$choice" -eq "3" ]]
+elif [[ "$scheme_name" == "polyfit_adapter" ]]
 then
 	args="-dp ${DAMOOS}"
 	for line in $lines
@@ -117,7 +117,7 @@ then
 		exit 1
 	fi
 
-elif [[ "$choice" -eq "4" ]]
+elif [[ "$scheme_name" == "pso_adapter" ]]
 then
 	args="-dp ${DAMOOS}"
 	for line in $lines
