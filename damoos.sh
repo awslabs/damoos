@@ -5,6 +5,11 @@
 
 # This is the main runner script of damoos that interacts with the user.
 
+if [ $# -eq 1 ] && [ "$1" == "--dry" ]
+then
+	DRYRUN=echo
+fi
+
 DAMOOS=$(dirname "$0")
 
 echo "Choose DAMOOS Scheme Adapter:"
@@ -129,7 +134,7 @@ then
 	exit 1
 fi
 
-if script -c "$cmd" -f "$file"
+if $DRYRUN script -c "$cmd" -f "$file"
 then
 	echo "Successfull!"
 else
