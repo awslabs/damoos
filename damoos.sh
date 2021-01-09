@@ -73,7 +73,7 @@ then
 			args="${args} -d $arg"
 		fi
 	done
-	if script -c "sudo python3 $DAMOOS/scheme_adapters/simple_rl_adapter/simple_rl_adapter.py $args" -f $file
+	if script -c "sudo python3 $DAMOOS/scheme_adapters/simple_rl_adapter/simple_rl_adapter.py $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
@@ -106,7 +106,7 @@ then
 			args="${args} -pfn $arg"
 		fi
 	done
-	if script -c "sudo python3 $DAMOOS/scheme_adapters/polyfit_adapter/polyfit_adapter.py $args" -f $file
+	if script -c "sudo python3 $DAMOOS/scheme_adapters/polyfit_adapter/polyfit_adapter.py $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
@@ -136,7 +136,7 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	if script -c "sudo python3 $DAMOOS/scheme_adapters/pso_adapter/pso_adapter.py $args" -f $file
+	if script -c "sudo python3 $DAMOOS/scheme_adapters/pso_adapter/pso_adapter.py $args" -f "$file"
 	then
 		echo "Successfull!"
 	else
