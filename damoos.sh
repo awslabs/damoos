@@ -5,37 +5,43 @@
 
 # This is the main runner script of damoos that interacts with the user.
 
+if [ $# -eq 1 ] && [ "$1" == "--dry" ]
+then
+	DRYRUN=echo
+fi
+
 DAMOOS=$(dirname "$0")
 
 echo "Choose DAMOOS Scheme Adapter:"
 cat "$DAMOOS"/scheme_adapters.txt
 read -r choice
 
+max_choice=$(wc -l < "scheme_adapters.txt")
+if [ "$choice" -gt "$max_choice" ] || [ "$choice" -lt "1" ]
+then
+	echo "Wrong choice.  It should be a number in [1, $max_choice]"
+	exit 1
+fi
+
 echo "Enter the log file name:"
 read -r file
 
-if [[ "$choice" -eq "1" ]]
+scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
+scheme_dir="$DAMOOS/scheme_adapters/$scheme_name"
+lines=$(cat "$scheme_dir/requirements.txt")
+
+cmd=""
+if [[ "$scheme_name" == "simple_adapter" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	for line in $lines
 	do
 		echo "Please enter ${line}"
 		read -r arg
 		args="${args} $arg"
 	done
-	script -c "sudo DAMOOS="$DAMOOS" bash "$DAMOOS"/scheme_adapters/"$scheme_name"/"$scheme_name".sh $args" -f $file
-	if [[ $? -eq 0 ]]
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
-elif [[ "$choice" -eq "2" ]]
+	cmd="sudo DAMOOS=\"$DAMOOS\" bash \"$scheme_dir/$scheme_name.sh\" $args"
+elif [[ "$scheme_name" == "simple_rl_adapter" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	args="-p ${DAMOOS}"
 	for line in $lines
 	do
@@ -68,19 +74,10 @@ then
 			args="${args} -d $arg"
 		fi
 	done
-	script -c "sudo python3 $DAMOOS/scheme_adapters/simple_rl_adapter/simple_rl_adapter.py $args" -f $file
-	if [[ $? -eq 0 ]]
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo python3 $scheme_dir/simple_rl_adapter.py $args"
 
-elif [[ "$choice" -eq "3" ]]
+elif [[ "$scheme_name" == "polyfit_adapter" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	args="-dp ${DAMOOS}"
 	for line in $lines
 	do
@@ -104,19 +101,10 @@ then
 			args="${args} -pfn $arg"
 		fi
 	done
-	script -c "sudo python3 $DAMOOS/scheme_adapters/polyfit_adapter/polyfit_adapter.py $args" -f $file
-	if [[ $? -eq 0 ]]
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo python3 $scheme_dir/polyfit_adapter.py $args"
 
-elif [[ "$choice" -eq "4" ]]
+elif [[ "$scheme_name" == "pso_adapter" ]]
 then
-	scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-	lines=$(cat "$DAMOOS"/scheme_adapters/"$scheme_name"/requirements.txt)
 	args="-dp ${DAMOOS}"
 	for line in $lines
 	do
@@ -137,12 +125,19 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	script -c "sudo python3 $DAMOOS/scheme_adapters/pso_adapter/pso_adapter.py $args" -f $file
-	if [[ $? -eq 0 ]]
-	then
-		echo "Successfull!"
-	else
-		echo "Please fix the mentioned error"
-		exit 1
-	fi
+	cmd="sudo python3 $scheme_dir/pso_adapter.py $args"
+fi
+
+if [ "$cmd" == "" ]
+then
+	echo "Wrong scheme adapter name ($scheme_name) is given"
+	exit 1
+fi
+
+if $DRYRUN script -c "$cmd" -f "$file"
+then
+	echo "Successfull!"
+else
+	echo "Please fix the mentioned error"
+	exit 1
 fi
