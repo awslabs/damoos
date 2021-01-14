@@ -11,8 +11,9 @@ sudo DAMOOS="$DAMOOS" bash "$DAMOOS"/metrics_collector/cleanup.sh
 # Cleanup remote metrics collectors - TODO
 
 # Cleanup results directory for local metric collectors
-metrics=$(tail -n +2 $DAMOOS/frontend/metric_directory.txt | sed '1s|-local||g')
+metrics=$(tail -n +2 $DAMOOS/frontend/metric_directory.txt)
 for metric in $metrics
 do
+	metric=$(echo $metric | sed '1s|-local||g')
 	sudo rm -f "$DAMOOS"/results/"$metric"/*
 done
