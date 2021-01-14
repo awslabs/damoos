@@ -7,7 +7,7 @@ for a workload-system pair.
 
 ## Overview
 
-DAMOOS stands for DAMon-based Optimal Operation Schemes and it is built to help the users to find the best DAMON scheme automatically. As the scheme depends both on the workload and the system characteristics, finding a good scheme manually is difficult. DAMOOS currently supports simple scheme adapter, simple RL Adapter, Polynomial Fit Adapter and Particle Swarm Optimization based adapter and in the future would also support more scheme adapters that the users can try out.
+DAMOOS stands for DAMon-based Optimal Operation Schemes and it is built to help the users to find the best DAMON scheme automatically. As the scheme depends both on the workload and the system characteristics, finding a good scheme manually is difficult. DAMOOS currently supports simple scheme adapter, simple RL Adapter, Polynomial Fit Adapter, Multi Dimension Polynomial Fit Adapter and Particle Swarm Optimization based adapter and in the future would also support more scheme adapters that the users can try out.
 ## Prerequisites
 
 
@@ -32,6 +32,7 @@ Choose DAMOOS Scheme Adapter:
 2. simple_rl_adapter
 3. polyfit_adapter
 4. pso_adapter
+5. multiD_polyfit_adapter
 1
 Enter the log file name:
 dedup_best_scheme.txt                    
@@ -54,6 +55,7 @@ Choose DAMOOS Scheme Adapter:
 2. simple_rl_adapter
 3. polyfit_adapter
 4. pso_adapter
+5. multiD_polyfit_adapter
 3
 Enter the log file name:
 splash2x.barnes_best_scheme.txt
@@ -85,6 +87,7 @@ For more information about the implementation details of DAMOOS, read the follow
     
     d) [PSO Adapter](scheme_adapters/pso_adapter/README.md)
 
+    e) [Multi Dimension Polyfit Adapter](scheme_adapters/multiD_polyfit_adapter/README.md)
 
 
 ## Contact Details
