@@ -167,6 +167,7 @@ class Polyfit:
 
         for key, value in orig_stat.items():
             orig_stat[key] = value / self.orig_repeat
+        print("Original Statistics for Workload without scheme applied:", orig_stat)
         self.workload_info.append(orig_stat)
 
     def convert(self, value):
@@ -287,8 +288,10 @@ class Polyfit:
         scores.reverse()
         num_points = max(0.1 * self.num_runs, 2)
         runs_left = self.total_runs - self.num_runs
-
         data_dict = dict()
+        if runs_left <= 0:
+            return data_dict
+
         for i in range(0, num_points, 1):
             for j in range(len(self.params)):
                 if isinstance(self.ranges[self.params[j]], list):
@@ -299,6 +302,7 @@ class Polyfit:
                     lower_bound = max(point - int(0.1 * range_diff), min_range)
                     upper_bound = min(point + int(0.1 * range_diff), max_range)
                     num_samples = int(runs_left / (num_points - i))
+                    num_samples = min(num_samples, upper_bound - lower_bound)
                     runs_left -= num_samples
                     random_list = random.sample(range(lower_bound, upper_bound), num_samples)
                     if self.params[j] in data_dict.keys():
@@ -420,7 +424,8 @@ class Polyfit:
                     best_scheme.append(round(best_point))
                 else:
                     best_scheme.append(-1)
-            return self.run_best_workload(best_scheme)
+            self.run_best_workload(best_scheme)
+            return best_point
 
     def find_best_scheme(self, json_path):
         self.parse_json(json_path)
@@ -437,10 +442,10 @@ class Polyfit:
         self.collect_score(res2, "append")
         res3 = res1 + res2
         self.workload_info.append(res3)
-        best_score, best_metric = self.fit(res)
-        print("Best Score", best_score, " Best Metric", best_metric)
+        best_point = self.fit(res)
+        print("Best point:", best_point)
         subprocess.call(["sudo", "DAMOOS=" + self.damoos_path, "bash", self.damoos_path + "/frontend/cleanup.sh"])
-
+        return best_point
 
 def main():
     parser = argparse.ArgumentParser()
@@ -466,7 +471,6 @@ def main():
 
     polyfit = Polyfit(damoos_path, lazybox_path, damos_path)
     polyfit.find_best_scheme(json_path)
-
 
 if __name__ == '__main__':
     main()
