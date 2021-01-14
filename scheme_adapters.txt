@@ -2,3 +2,4 @@
 2. simple_rl_adapter
 3. polyfit_adapter
 4. pso_adapter
+5. multiD_polyfit_adapter

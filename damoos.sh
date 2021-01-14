@@ -126,6 +126,31 @@ then
 		fi
 	done
 	cmd="sudo python3 $scheme_dir/pso_adapter.py $args"
+
+elif [[ "$scheme_name" == "multiD_polyfit_adapter" ]]
+then
+	args="-dp ${DAMOOS}"
+	for line in $lines
+	do
+		echo "Please enter ${line}"
+		read -r arg
+		
+		if [[ "$arg" == "$NL" ]]
+		then
+			continue
+		elif [[ $line == *"-lb"* ]]
+		then
+			args="${args} -lb $arg"
+		elif [[ $line == *"-dm"* ]]
+		then
+			args="${args} -dm $arg"
+		elif [[ $line == *"-jp"* ]]
+		then
+			args="${args} -jp $arg"
+		fi
+	done
+	cmd="sudo python3 $scheme_dir/multiD_polyfit_adapter.py $args"
+
 fi
 
 if [ "$cmd" == "" ]
