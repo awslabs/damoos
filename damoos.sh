@@ -5,12 +5,31 @@
 
 # This is the main runner script of damoos that interacts with the user.
 
-if [ $# -eq 1 ] && [ "$1" == "--dry" ]
-then
-	DRYRUN=echo
-fi
+function pr_usage {
+	echo "Usage: $0 [OPTION]..."
+	echo
+	echo "OPTION"
+	echo "  --dry		Do nothing but show how it will work"
+	echo "  -h, --help	Show this usage"
+}
 
-DAMOOS=$(dirname "$0")
+while [ $# -ne 0 ]; do
+	case $1 in
+	"--dry")
+		DRYRUN=echo
+		shift 1
+		continue
+		;;
+	"--help" | "-h")
+		pr_usage
+		exit 0
+		;;
+	*)
+		pr_usage
+		exit 1
+		;;
+	esac
+done
 
 echo "Choose DAMOOS Scheme Adapter:"
 cat "$DAMOOS"/scheme_adapters.txt
