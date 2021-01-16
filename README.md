@@ -1,9 +1,9 @@
 DAMOOS (DAMON-based Optimal Operation Schemes)
 ==============================================
 
-[DAMOS](https://damonitor.github.io/doc/html/next/admin-guide/mm/damon/usage.html?highlight=damos#damon-based-operation-schemes)
-or DAMON-based Operation Scheme allows users to do DAMON based
-memory-management optimization.
+[DAMON](https://damonitor.github.io) allows users to do data access
+monitoring-based memory-management optimizations with no code but simple
+[scheme](https://damonitor.github.io/doc/html/next/admin-guide/mm/damon/usage.html?highlight=damos#damon-based-operation-schemes).
 
 This project aims to automate the process of choosing right schemes for a
 workload-system pair.
