@@ -198,7 +198,7 @@ fi
 
 if [ "$cmd" == "" ]
 then
-	echo "Wrong scheme adapter name ($adapter) is given"
+	echo "something wrong!"
 	exit 1
 fi
 
