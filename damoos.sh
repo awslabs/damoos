@@ -5,45 +5,88 @@
 
 # This is the main runner script of damoos that interacts with the user.
 
-if [ $# -eq 1 ] && [ "$1" == "--dry" ]
-then
-	DRYRUN=echo
-fi
-
 DAMOOS=$(dirname "$0")
 
-echo "Choose DAMOOS Scheme Adapter:"
-cat "$DAMOOS"/scheme_adapters.txt
-read -r choice
+scheme_adapters=$(ls "$DAMOOS/scheme_adapters")
 
-max_choice=$(wc -l < "scheme_adapters.txt")
-if [ "$choice" -gt "$max_choice" ] || [ "$choice" -lt "1" ]
+function pr_usage {
+	echo "Usage: $0 [OPTION]... <scheme adapter> <log file>"
+	echo
+	echo "OPTION"
+	echo "  --dry		Do nothing but show how it will work"
+	echo "  -h, --help	Show this usage"
+	echo
+	echo "Supported <scheme adapter>s are:"
+	for s in $scheme_adapters
+	do
+		echo "  $s"
+	done
+	echo
+}
+
+if [ $# -lt 1 ]
 then
-	echo "Wrong choice.  It should be a number in [1, $max_choice]"
+	pr_usage
 	exit 1
 fi
 
-echo "Enter the log file name:"
-read -r file
+while [ $# -ne 0 ]; do
+	case $1 in
+	"--dry")
+		DRYRUN=echo
+		shift 1
+		continue
+		;;
+	"--help" | "-h")
+		pr_usage
+		exit 0
+		;;
+	*)
+		if [ $# -ne 2 ]
+		then
+			pr_usage
+			exit 1
+		fi
+		adapter=$1
+		log_file=$2
 
-scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
-scheme_dir="$DAMOOS/scheme_adapters/$scheme_name"
-lines=$(cat "$scheme_dir/requirements.txt")
+		wrong_scheme_name=1
+		for s in $scheme_adapters
+		do
+			if [ "$adapter" == "$s" ]
+			then
+				wrong_scheme_name=0
+				break
+			fi
+		done
+		if [ "$wrong_scheme_name" -eq 1 ]
+		then
+			pr_usage
+			exit 1
+		fi
+
+		break
+		;;
+	esac
+done
+
+adapter_dir="$DAMOOS/scheme_adapters/$adapter"
+adapter_requirements=$(cat "$adapter_dir/requirements.txt")
 
 cmd=""
-if [[ "$scheme_name" == "simple_adapter" ]]
+if [[ "$adapter" == "simple_adapter" ]]
 then
-	for line in $lines
+	for line in $adapter_requirements
 	do
 		echo "Please enter ${line}"
 		read -r arg
 		args="${args} $arg"
 	done
-	cmd="sudo DAMOOS=\"$DAMOOS\" bash \"$scheme_dir/$scheme_name.sh\" $args"
-elif [[ "$scheme_name" == "simple_rl_adapter" ]]
+	cmd="sudo DAMOOS=\"$DAMOOS\" bash \"$adapter_dir/$adapter.sh\" $args"
+elif [[ "$adapter" == "simple_rl_adapter" ]]
 then
 	args="-p ${DAMOOS}"
-	for line in $lines
+	for line in $adapter_requirements
 	do
 		echo "Please enter ${line}"
 		read -r arg
@@ -74,12 +117,12 @@ then
 			args="${args} -d $arg"
 		fi
 	done
-	cmd="sudo python3 $scheme_dir/simple_rl_adapter.py $args"
+	cmd="sudo python3 $adapter_dir/simple_rl_adapter.py $args"
 
-elif [[ "$scheme_name" == "polyfit_adapter" ]]
+elif [[ "$adapter" == "polyfit_adapter" ]]
 then
 	args="-dp ${DAMOOS}"
-	for line in $lines
+	for line in $adapter_requirements
 	do
 		echo "Please enter ${line}"
 		read -r arg
@@ -101,12 +144,12 @@ then
 			args="${args} -pfn $arg"
 		fi
 	done
-	cmd="sudo python3 $scheme_dir/polyfit_adapter.py $args"
+	cmd="sudo python3 $adapter_dir/polyfit_adapter.py $args"
 
-elif [[ "$scheme_name" == "pso_adapter" ]]
+elif [[ "$adapter" == "pso_adapter" ]]
 then
 	args="-dp ${DAMOOS}"
-	for line in $lines
+	for line in $adapter_requirements
 	do
 		echo "Please enter ${line}"
 		read -r arg
@@ -125,12 +168,12 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	cmd="sudo python3 $scheme_dir/pso_adapter.py $args"
+	cmd="sudo python3 $adapter_dir/pso_adapter.py $args"
 
-elif [[ "$scheme_name" == "multiD_polyfit_adapter" ]]
+elif [[ "$adapter" == "multiD_polyfit_adapter" ]]
 then
 	args="-dp ${DAMOOS}"
-	for line in $lines
+	for line in $adapter_requirements
 	do
 		echo "Please enter ${line}"
 		read -r arg
@@ -149,17 +192,17 @@ then
 			args="${args} -jp $arg"
 		fi
 	done
-	cmd="sudo python3 $scheme_dir/multiD_polyfit_adapter.py $args"
+	cmd="sudo python3 $adapter_dir/multiD_polyfit_adapter.py $args"
 
 fi
 
 if [ "$cmd" == "" ]
 then
-	echo "Wrong scheme adapter name ($scheme_name) is given"
+	echo "something wrong!"
 	exit 1
 fi
 
-if $DRYRUN script -c "$cmd" -f "$file"
+if $DRYRUN script -c "$cmd" -f "$log_file"
 then
 	echo "Successfull!"
 else
