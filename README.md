@@ -47,21 +47,11 @@ Command is used to run the workload, it should ideally use an absolute path and
 put the process in background so that DAMOOS can apply the different schemes to
 it.
 
-Though `damoos.sh` is user-friendly and would ask you for all that you need to
-answer, below is a small example of using the simple adapter for a parsec3
-workload named “dedup”
+Below is a small example of using the `simple_adapter` for a parsec3 workload
+named “dedup” and record the log in `damoos_log` file.
 
 ```
-$ sudo bash damoos.sh
-Choose DAMOOS Scheme Adapter:
-1. simple_adapter
-2. simple_rl_adapter
-3. polyfit_adapter
-4. pso_adapter
-5. multiD_polyfit_adapter
-1
-Enter the log file name:
-dedup_best_scheme.txt                    
+$ sudo bash damoos.sh simple_adapter damoos_log
 Please enter Workload_Name(E.g:dedup,canneal,etc.)
 dedup
 Please enter Runtime_Importance_Score(E.g:"0.3")
@@ -72,21 +62,13 @@ Script started, file is dedup_best_scheme.txt
  Optimizing dedup workload..
 ```
 
-`damoos.sh` script first shows a list of scheme adapters and asks the user to
-choose between them, you need to enter the serial number. Next, it will ask you
-to enter the inputs required by the chosen scheme adapter.
+`damoos.sh` receives name of the adapter to use and name of a file to record
+the log as command line arguments.  Then, it will ask you to enter the inputs
+required by the chosen scheme adapter.
 
 Here is another example for `polyfit_adapter`:
 ```
-Choose DAMOOS Scheme Adapter:
-1. simple_adapter
-2. simple_rl_adapter
-3. polyfit_adapter
-4. pso_adapter
-5. multiD_polyfit_adapter
-3
-Enter the log file name:
-splash2x.barnes_best_scheme.txt
+$ sudo bash damoos.sh polyfit_adapter damoos_log
 Please enter 1.Lazybox_Path(-lb)
 /home/dev4/lazybox
 Please enter 2.DAMOS_Path(-dm)
