@@ -30,13 +30,13 @@ https://damonitor.github.io/doc/html/next/admin-guide/mm/damon/index.html
 Quick Start
 -----------
 
-If you are only a user of DAMOOS, then the interactive damoos.sh script is all
-that you need to know about. If you are interested in writing your own scheme
-adapters or tweaking some of the code, please read the details of DAMOOS in the
-different subdirectories.
+If you are only a user of DAMOOS, then the interactive `damoos.sh` script is
+all that you need to know about. If you are interested in writing your own
+scheme adapters or tweaking some of the code, please read the details of DAMOOS
+in the different subdirectories.
 
 You need a DAMON-enabled kernel to try out DAMOOS. You also need to register
-your workload in the frontend/workload_directory.txt in the following format:
+your workload in the `frontend/workload_directory.txt` in the following format:
 
 ShortName@@@NameforPID@@@Command
 
@@ -47,7 +47,7 @@ Command is used to run the workload, it should ideally use an absolute path and
 put the process in background so that DAMOOS can apply the different schemes to
 it.
 
-Though damoos.sh is user-friendly and would ask you for all that you need to
+Though `damoos.sh` is user-friendly and would ask you for all that you need to
 answer, below is a small example of using the simple adapter for a parsec3
 workload named “dedup”
 
@@ -72,11 +72,11 @@ Script started, file is dedup_best_scheme.txt
  Optimizing dedup workload..
 ```
 
-damoos.sh script first shows a list of scheme adapters and asks the user to
+`damoos.sh` script first shows a list of scheme adapters and asks the user to
 choose between them, you need to enter the serial number. Next, it will ask you
 to enter the inputs required by the chosen scheme adapter.
 
-Here is another example for polyfit_adapter:
+Here is another example for `polyfit_adapter`:
 ```
 Choose DAMOOS Scheme Adapter:
 1. simple_adapter
