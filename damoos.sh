@@ -5,13 +5,30 @@
 
 # This is the main runner script of damoos that interacts with the user.
 
+DAMOOS=$(dirname "$0")
+
+scheme_adapters=$(ls "$DAMOOS/scheme_adapters")
+
 function pr_usage {
-	echo "Usage: $0 [OPTION]..."
+	echo "Usage: $0 [OPTION]... <scheme adapter> <log file>"
 	echo
 	echo "OPTION"
 	echo "  --dry		Do nothing but show how it will work"
 	echo "  -h, --help	Show this usage"
+	echo
+	echo "Supported <scheme adapter>s are:"
+	for s in $scheme_adapters
+	do
+		echo "  $s"
+	done
+	echo
 }
+
+if [ $# -lt 1 ]
+then
+	pr_usage
+	exit 1
+fi
 
 while [ $# -ne 0 ]; do
 	case $1 in
@@ -25,27 +42,34 @@ while [ $# -ne 0 ]; do
 		exit 0
 		;;
 	*)
-		pr_usage
-		exit 1
+		if [ $# -ne 2 ]
+		then
+			pr_usage
+			exit 1
+		fi
+		scheme_name=$1
+		file=$2
+
+		wrong_scheme_name=1
+		for s in $scheme_adapters
+		do
+			if [ "$scheme_name" == "$s" ]
+			then
+				wrong_scheme_name=0
+				break
+			fi
+		done
+		if [ "$wrong_scheme_name" -eq 1 ]
+		then
+			pr_usage
+			exit 1
+		fi
+
+		break
 		;;
 	esac
 done
 
-echo "Choose DAMOOS Scheme Adapter:"
-cat "$DAMOOS"/scheme_adapters.txt
-read -r choice
-
-max_choice=$(wc -l < "scheme_adapters.txt")
-if [ "$choice" -gt "$max_choice" ] || [ "$choice" -lt "1" ]
-then
-	echo "Wrong choice.  It should be a number in [1, $max_choice]"
-	exit 1
-fi
-
-echo "Enter the log file name:"
-read -r file
-
-scheme_name=$(grep "$choice" < "$DAMOOS"/scheme_adapters.txt | grep -oh "[^ ]*$")
 scheme_dir="$DAMOOS/scheme_adapters/$scheme_name"
 lines=$(cat "$scheme_dir/requirements.txt")
 
