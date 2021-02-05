@@ -406,7 +406,6 @@ class Polyfit:
             for i in range(0, 61, 6):
                 x.append(xx[i])
                 y.append(yy[i])
-
             self.polynomial_fit(x, y, x[0], x[-1], min(len(x) / 3, 10))
         else:
             best_scheme = []
@@ -425,6 +424,7 @@ class Polyfit:
                 else:
                     best_scheme.append(-1)
             self.run_best_workload(best_scheme)
+            print("Best Point:", best_point, "Best Value:", best_val)
             return best_point
 
     def find_best_scheme(self, json_path):
