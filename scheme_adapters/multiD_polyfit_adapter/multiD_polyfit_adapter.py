@@ -34,8 +34,6 @@ def generate_json(file_name, damoos_path):
     return parameters
 
 def generate_best_scheme(file_name, damoos_path, best_points):
-    json_file = open(damoos_path + "/scheme_adapters/multiD_polyfit_adapter/json_files/" + file_name, "r")
-    json_parsed = json.load(json_file)
     parameters = ["min_size", "max_size", "min_freq", "max_freq", "min_age", "max_age"]
     new_scheme = []
     
