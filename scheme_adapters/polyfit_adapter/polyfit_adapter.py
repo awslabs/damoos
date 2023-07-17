@@ -252,6 +252,9 @@ class Polyfit:
                                 scheme = min_size + "\t" + max_size + "\t"
                                 scheme += str(min_freq) + "\t" + str(max_freq) + "\t"
                                 scheme += min_age + "\t" + max_age + "\t" + action
+                                scheme = subprocess.check_output(
+                                        ["python3", self.damos_path,
+                                            "translate_damos", scheme]).decode()
 
                                 file_name = self.damoos_path + "/scheme_adapters/polyfit_adapter/scheme"
                                 scheme_file = open(file_name, "w")
