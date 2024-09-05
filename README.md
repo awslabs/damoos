@@ -1,3 +1,15 @@
+THIS REPO IS DEPRECATED
+=======================
+
+This repo (https://github.com/awslabs/damoos) was one of the official GitHub
+repos for damo.  However, after 2024-09-05, this has been[1] no longer the
+official GitHub repo.  Please use the new official GitHub repo
+(https://github.com/damonitor/damoos) instead.
+
+[1] https://lore.kernel.org/20240813232158.83903-1-sj@kernel.org
+
+---
+
 DAMOOS (DAMON-based Optimal Operation Schemes)
 ==============================================
 
